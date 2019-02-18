@@ -44,7 +44,6 @@
 
 class WeatherCityModel {
     getWeather(city, fn) {
-        console.log(city);
 
         var request = new XMLHttpRequest();
 
@@ -52,9 +51,7 @@ class WeatherCityModel {
         request.onload = function (e) {
             e.preventDefault();
             var response = JSON.parse(e.currentTarget.responseText);
-            // var temp = response.main.temp;
-            var temp = 36;
-            console.log('Model:  ' + city);
+            var temp = response.main.temp;
             fn(temp);
         }
         request.send();
@@ -74,7 +71,7 @@ class WeatherCityController {
 
     showWeather(cityName) {
         // this._model.getWeather(cityName, this.getWeatherView.bind(this));
-        this._model.getWeather(cityName, this._view.render.bind(this));
+        this._model.getWeather(cityName,  this._view.render.bind(this));
     }
 
     // getWeatherView(data) {
@@ -90,14 +87,22 @@ class WeatherCityView {
     }
 
     render(data) {
-        var cityName = document.getElementById('city-input').value;
+        
+        
         var liCity = document.getElementById('city-temp');
         var btnSubmit = document.getElementById('city-btn-submit');
         
-        console.log('Rednder: ' + cityName);
-
         liCity.innerHTML = '<h3>' + data + '</h3>';
-        btnSubmit.addEventListener('click', this.showWeather(`${cityName}`), false);
+
+        // btnSubmit.addEventListener('click', () => this.showWeather(`${cityName}`));
+
+        // console.log('rendered ' + cityName);
+        
+        btnSubmit.onclick = () => {
+            var cityName = document.getElementById('city-input').value;
+            console.log("Pushed button " + cityName);
+            this.showWeather(`${cityName}`);
+        };
     }
 }
 
