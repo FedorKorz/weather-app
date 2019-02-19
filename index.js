@@ -42,73 +42,74 @@
  */
 
 
-class WeatherCityModel {
-    getWeather(city, fn) {
+class WeatherAppModel {
+    getWeather(cityName, fn) {
 
-        var request = new XMLHttpRequest();
+        const request = new XMLHttpRequest();
+        const key = '781c836c7eb0333d1dd3d45ed4425c6c';
 
-        request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=781c836c7eb0333d1dd3d45ed4425c6c`);
+        request.open('GET', `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${key}`);
         request.onload = function (e) {
             e.preventDefault();
-            var response = JSON.parse(e.currentTarget.responseText);
-            var temp = response.main.temp;
-            fn(temp);
+            let response = JSON.parse(e.currentTarget.responseText);
+            let weatherObject = response.main;
+            fn(weatherObject, cityName);
         }
         request.send();
-    }
-}
+    };
+};
 
-class WeatherCityController {
+class WeatherAppController {
     constructor(model, view) {
         this._model = model;
         this._view = view;
-    }
+    };
 
     initialize() {
         this._view.showWeather = this.showWeather.bind(this);
         this._view.render();
-    }
+    };
 
     showWeather(cityName) {
-        // this._model.getWeather(cityName, this.getWeatherView.bind(this));
-        this._model.getWeather(cityName,  this._view.render.bind(this));
-    }
+        // this._model.getWeather(cityName, this._view.render.bind(this));
+        this._model.getWeather(cityName, this._view.render.bind(this._view));
+    };
+};
 
-    // getWeatherView(data) {
-    //     this._view.render(data);
-    // }
-}
-
-class WeatherCityView {
+class WeatherAppView {
 
     constructor(li, btn) {
         this._li = li;
         this._btn = btn;
+    };
+
+    apndCityWeather(weatherObject) {
+        const li = document.createElement('li');
+        const ulList = document.querySelector('.city-list');
+
+        li.textContent = JSON.stringify(weatherObject);
+
+        ulList.appendChild(li);
     }
 
-    render(data) {
-        
-        
-        var liCity = document.getElementById('city-temp');
-        var btnSubmit = document.getElementById('city-btn-submit');
-        
-        liCity.innerHTML = '<h3>' + data + '</h3>';
+    render(weatherObject, cityName) {
 
-        // btnSubmit.addEventListener('click', () => this.showWeather(`${cityName}`));
+        const btnSubmit = document.getElementById('city-btn-submit');
 
-        // console.log('rendered ' + cityName);
-        
+        if (weatherObject !== undefined) {
+            this.apndCityWeather(weatherObject, cityName); // View не имеет своего контекста...
+        };
+
         btnSubmit.onclick = () => {
-            var cityName = document.getElementById('city-input').value;
-            console.log("Pushed button " + cityName);
+            let cityName = document.getElementById('city-input').value;
             this.showWeather(`${cityName}`);
         };
-    }
-}
+    };
+};
 
-var model = new WeatherCityModel();
-var view = new WeatherCityView();
-var controller = new WeatherCityController(model, view);
+var view = new WeatherAppView();
+var model = new WeatherAppModel();
+var controller = new WeatherAppController(model, view);
 
 controller.initialize();
 
