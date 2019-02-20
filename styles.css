@@ -1,0 +1,48 @@
+.weather-data {
+    margin: 0 auto;
+    width: auto;
+}
+
+.item {
+    display: flex;
+    width: 400px;
+    height: 170px;
+    justify-content: space-evenly;
+    font-family: Arial;
+    font-size: 14px;
+    background: lightyellow;
+    margin: 10px;
+}
+
+body {
+    background: lightgreen;
+}
+
+img {
+    width: 90px;
+}
+
+.temp {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.temp-val {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.weather-params {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.param {
+    font-weight: bold;
+}
+
+.value {
+    color: darkgray;
+}

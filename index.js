@@ -83,13 +83,46 @@ class WeatherAppView {
         this._btn = btn;
     };
 
-    apndCityWeather(weatherObject) {
-        const li = document.createElement('li');
+    apndCityWeather(weatherObject, cityName) {
+
+        const item = document.createElement('div');
         const ulList = document.querySelector('.city-list');
+        console.log(weatherObject);
+        
+        item.innerHTML =  `<div class="item">
+            <div class="weather-overall">
+            <div class="city-name">
+                <h3>${ cityName }</h3>
+            </div>
+            <div class="temp">
+                <img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2016/png/iconmonstr-weather-2.png&r=0&g=0&b=0"/>
+                <span class="temp-val">${ weatherObject.temp }</span>
+            </div>
+            </div>
+            <div class="weather-params">
+            <div class="pressure">
+                <span class="param">Давление</span><br>
+                <span class="value">${ weatherObject.pressure } мм рт. ст.</span>
+            </div>
+            <div class="wind">
+                <span class="param">Ветер</span><br>
+                <span class="value">14.0 м/с З</span> 
+            </div>
+            <div class="humidity">
+                <span class="param">Влажность</span><br>
+                <span class="value">${ weatherObject.humidity }%</span>
+            </div>
+            </div>
+        </div>`;
 
-        li.textContent = JSON.stringify(weatherObject);
+        ulList.appendChild(item);
 
-        ulList.appendChild(li);
+        // const li = document.createElement('li');
+        // const ulList = document.querySelector('.city-list');
+
+        // li.textContent = `${cityName} ` + JSON.stringify(weatherObject);
+
+        // ulList.appendChild(li);
     }
 
     render(weatherObject, cityName) {
