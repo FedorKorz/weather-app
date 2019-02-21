@@ -5,43 +5,6 @@
  * Controller - логика приложения, посредник между Model и View.
  */
 
-/**
- * 1. Пользователь пишет название города и нажимает кнопку поиск.
- *  1.1. Во View нужно сделать addEventlistener
- *  2.2. Вызывется функция, которая должна делать запрос к серверу.
- *  2.3. Получив ответ вызываем функцию рендер в контроллере.
- *
- *
- *       class Controller {
- *           constructor(view, model)
- *           initialize() {
- *              this.view.showWeather = showWeather // хз как
- *           }
- *           showWeather(cityName) {
- *              this.view(this.model.getWeather(cityName))
- *           }
- *       }
- *
- *
- *      class View {
- *          render(viewModel) {
- *               <input>'viewModel'</input>
- *               <button id='addCity'></button>
- *               addCity.addEventListener('click', showWeather(cityName));
- *          }
- *      }
- *
- *      class Model {
- *          getWeather() return data
- *      }
- *
- *      var view = new View();
- *      var model = new Model();
- *      var controller = new Controller(view, model);
- *      controller.initialize();
- */
-
-
 class WeatherAppModel {
     getWeather(cityName, fn) {
 
@@ -71,7 +34,6 @@ class WeatherAppController {
     };
 
     showWeather(cityName) {
-        // this._model.getWeather(cityName, this._view.render.bind(this));
         this._model.getWeather(cityName, this._view.render.bind(this._view));
     };
 };
@@ -87,42 +49,37 @@ class WeatherAppView {
 
         const item = document.createElement('div');
         const ulList = document.querySelector('.city-list');
+        let celsiusTemp = weatherObject.temp - 273;
         console.log(weatherObject);
         
-        item.innerHTML =  `<div class="item">
-            <div class="weather-overall">
-            <div class="city-name">
-                <h3>${ cityName }</h3>
-            </div>
-            <div class="temp">
-                <img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2016/png/iconmonstr-weather-2.png&r=0&g=0&b=0"/>
-                <span class="temp-val">${ weatherObject.temp }</span>
-            </div>
-            </div>
-            <div class="weather-params">
-            <div class="pressure">
-                <span class="param">Давление</span><br>
-                <span class="value">${ weatherObject.pressure } мм рт. ст.</span>
-            </div>
-            <div class="wind">
-                <span class="param">Ветер</span><br>
-                <span class="value">14.0 м/с З</span> 
-            </div>
-            <div class="humidity">
-                <span class="param">Влажность</span><br>
-                <span class="value">${ weatherObject.humidity }%</span>
-            </div>
-            </div>
-        </div>`;
+        item.innerHTML =  
+            `<div class="item">
+                <div class="weather-overall">
+                <div class="city-name">
+                    <h3>${ cityName }</h3>
+                </div>
+                <div class="temp">
+                    <img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2016/png/iconmonstr-weather-2.png&r=0&g=0&b=0"/>
+                    <span class="temp-val">${ celsiusTemp.toFixed(1) }</span>
+                </div>
+                </div>
+                <div class="weather-params">
+                <div class="pressure">
+                    <span class="param">Давление</span><br>
+                    <span class="value">${ weatherObject.pressure } мм рт. ст.</span>
+                </div>
+                <div class="wind">
+                    <span class="param">Ветер</span><br>
+                    <span class="value">14.0 м/с З</span> 
+                </div>
+                <div class="humidity">
+                    <span class="param">Влажность</span><br>
+                    <span class="value">${ weatherObject.humidity }%</span>
+                </div>
+                </div>
+            </div>`;
 
         ulList.appendChild(item);
-
-        // const li = document.createElement('li');
-        // const ulList = document.querySelector('.city-list');
-
-        // li.textContent = `${cityName} ` + JSON.stringify(weatherObject);
-
-        // ulList.appendChild(li);
     }
 
     render(weatherObject, cityName) {
@@ -130,7 +87,7 @@ class WeatherAppView {
         const btnSubmit = document.getElementById('city-btn-submit');
 
         if (weatherObject !== undefined) {
-            this.apndCityWeather(weatherObject, cityName); // View не имеет своего контекста...
+            this.apndCityWeather(weatherObject, cityName); 
         };
 
         btnSubmit.onclick = () => {

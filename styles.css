@@ -22,6 +22,11 @@ img {
     width: 90px;
 }
 
+.container {
+    width: 480px;
+    margin: 0 auto;
+}
+
 .temp {
     display: flex;
     align-items: center;
@@ -29,7 +34,8 @@ img {
 }
 
 .temp-val {
-    font-size: 30px;
+    font-size: 20px;
+    padding-left: 10px;
     font-weight: bold;
 }
 
@@ -45,4 +51,30 @@ img {
 
 .value {
     color: darkgray;
+}
+
+#city-input {
+    width: 400px;
+    height: 57px;
+    margin: 0;
+    border: none;
+    font-size: 25px;
+    padding-left: 30px;
+    border-radius: 5px 0 0 5px;
+}
+
+#city-btn-submit {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    padding-top: 24px;
+    margin-left: -4px;
+    text-align: center;
+    padding-bottom: 18px;
+    display: inline-block;
+    border-radius: 0 5px 5px 0;
+    background-color: lightblue; 
+    font-family: Arial, Helvetica, sans-serif;  
 }
