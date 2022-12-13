@@ -1,3 +1,2 @@
 # weather-app
-[![Watch the video]([![Watch the video]([(https://i.postimg.cc/wjGvGHzc/ezgif-com-gif-maker.gif)])](https://youtu.be/EXx5mpzhQ1g)
-)](https://youtu.be/EXx5mpzhQ1g)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
