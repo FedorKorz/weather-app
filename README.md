@@ -8,17 +8,4 @@
 [[Watch the video]](https://youtu.be/EXx5mpzhQ1g)
 
 
-№javascript
-css
-html
-api
-bootstrap
-css3
-openweathermap-api
-openweathermap
-bootstrap-theme
-weather-app
-weatherapp
-openweather-api
-openweather
-theodinproje
+
